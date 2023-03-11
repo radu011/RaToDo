@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ABDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorii">
+    <Key>
+      <PropertyRef Name="IDCategorie" />
+    </Key>
+    <Property Name="IDCategorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDUtilizator" Type="Int32" />
+    <Property Name="Nume" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Utilizatori" Relationship="Self.FK__Categorii__IDUti__2B3F6F97" FromRole="Categorii" ToRole="Utilizatori" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK__Task__IDCategori__2F10007B" FromRole="Categorii" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="IDTask" />
+    </Key>
+    <Property Name="IDTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTipTask" Type="Int32" Nullable="false" />
+    <Property Name="IDCategorie" Type="Int32" Nullable="false" />
+    <Property Name="IDUtilizator" Type="Int32" Nullable="false" />
+    <Property Name="Titlu" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descriere" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Stare" Type="Boolean" Nullable="false" />
+    <Property Name="Remainder" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Categorii" Relationship="Self.FK__Task__IDCategori__2F10007B" FromRole="Task" ToRole="Categorii" />
+    <NavigationProperty Name="Tip_Task" Relationship="Self.FK__Task__IDTipTask__2E1BDC42" FromRole="Task" ToRole="Tip_Task" />
+    <NavigationProperty Name="Utilizatori" Relationship="Self.FK__Task__IDUtilizat__300424B4" FromRole="Task" ToRole="Utilizatori" />
+  </EntityType>
+  <EntityType Name="Tip_Task">
+    <Key>
+      <PropertyRef Name="IDTipTask" />
+    </Key>
+    <Property Name="IDTipTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Denumire" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK__Task__IDTipTask__2E1BDC42" FromRole="Tip_Task" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Tip_Utilizator">
+    <Key>
+      <PropertyRef Name="IDTip_Utilzator" />
+    </Key>
+    <Property Name="IDTip_Utilzator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Denumire" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Utilizatoris" Relationship="Self.FK__Utilizato__IDTip__267ABA7A" FromRole="Tip_Utilizator" ToRole="Utilizatori" />
+  </EntityType>
+  <EntityType Name="Utilizatori">
+    <Key>
+      <PropertyRef Name="IDUtilizator" />
+    </Key>
+    <Property Name="IDUtilizator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTip_Utilizator" Type="Int32" Nullable="false" />
+    <Property Name="Nume" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prenume" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Pass" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="E_mail" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Categoriis" Relationship="Self.FK__Categorii__IDUti__2B3F6F97" FromRole="Utilizatori" ToRole="Categorii" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK__Task__IDUtilizat__300424B4" FromRole="Utilizatori" ToRole="Task" />
+    <NavigationProperty Name="Tip_Utilizator" Relationship="Self.FK__Utilizato__IDTip__267ABA7A" FromRole="Utilizatori" ToRole="Tip_Utilizator" />
+  </EntityType>
+  <Association Name="FK__Categorii__IDUti__2B3F6F97">
+    <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="0..1" />
+    <End Role="Categorii" Type="Self.Categorii" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilizatori">
+        <PropertyRef Name="IDUtilizator" />
+      </Principal>
+      <Dependent Role="Categorii">
+        <PropertyRef Name="IDUtilizator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Task__IDCategori__2F10007B">
+    <End Role="Categorii" Type="Self.Categorii" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorii">
+        <PropertyRef Name="IDCategorie" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="IDCategorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Task__IDTipTask__2E1BDC42">
+    <End Role="Tip_Task" Type="Self.Tip_Task" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tip_Task">
+        <PropertyRef Name="IDTipTask" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="IDTipTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Task__IDUtilizat__300424B4">
+    <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilizatori">
+        <PropertyRef Name="IDUtilizator" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="IDUtilizator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Utilizato__IDTip__267ABA7A">
+    <End Role="Tip_Utilizator" Type="Self.Tip_Utilizator" Multiplicity="1" />
+    <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tip_Utilizator">
+        <PropertyRef Name="IDTip_Utilzator" />
+      </Principal>
+      <Dependent Role="Utilizatori">
+        <PropertyRef Name="IDTip_Utilizator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ABDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categoriis" EntityType="Self.Categorii" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <EntitySet Name="Tip_Task" EntityType="Self.Tip_Task" />
+    <EntitySet Name="Tip_Utilizator" EntityType="Self.Tip_Utilizator" />
+    <EntitySet Name="Utilizatoris" EntityType="Self.Utilizatori" />
+    <AssociationSet Name="FK__Categorii__IDUti__2B3F6F97" Association="Self.FK__Categorii__IDUti__2B3F6F97">
+      <End Role="Utilizatori" EntitySet="Utilizatoris" />
+      <End Role="Categorii" EntitySet="Categoriis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Task__IDCategori__2F10007B" Association="Self.FK__Task__IDCategori__2F10007B">
+      <End Role="Categorii" EntitySet="Categoriis" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Task__IDTipTask__2E1BDC42" Association="Self.FK__Task__IDTipTask__2E1BDC42">
+      <End Role="Tip_Task" EntitySet="Tip_Task" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Task__IDUtilizat__300424B4" Association="Self.FK__Task__IDUtilizat__300424B4">
+      <End Role="Utilizatori" EntitySet="Utilizatoris" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Utilizato__IDTip__267ABA7A" Association="Self.FK__Utilizato__IDTip__267ABA7A">
+      <End Role="Tip_Utilizator" EntitySet="Tip_Utilizator" />
+      <End Role="Utilizatori" EntitySet="Utilizatoris" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

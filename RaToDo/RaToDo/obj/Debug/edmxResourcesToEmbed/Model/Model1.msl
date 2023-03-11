@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ABDModelStoreContainer" CdmEntityContainer="ABDEntities">
+    <EntitySetMapping Name="Categoriis">
+      <EntityTypeMapping TypeName="ABDModel.Categorii">
+        <MappingFragment StoreEntitySet="Categorii">
+          <ScalarProperty Name="IDCategorie" ColumnName="IDCategorie" />
+          <ScalarProperty Name="IDUtilizator" ColumnName="IDUtilizator" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="ABDModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="IDTask" ColumnName="IDTask" />
+          <ScalarProperty Name="IDTipTask" ColumnName="IDTipTask" />
+          <ScalarProperty Name="IDCategorie" ColumnName="IDCategorie" />
+          <ScalarProperty Name="IDUtilizator" ColumnName="IDUtilizator" />
+          <ScalarProperty Name="Titlu" ColumnName="Titlu" />
+          <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="Stare" ColumnName="Stare" />
+          <ScalarProperty Name="Remainder" ColumnName="Remainder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tip_Task">
+      <EntityTypeMapping TypeName="ABDModel.Tip_Task">
+        <MappingFragment StoreEntitySet="Tip_Task">
+          <ScalarProperty Name="IDTipTask" ColumnName="IDTipTask" />
+          <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tip_Utilizator">
+      <EntityTypeMapping TypeName="ABDModel.Tip_Utilizator">
+        <MappingFragment StoreEntitySet="Tip_Utilizator">
+          <ScalarProperty Name="IDTip_Utilzator" ColumnName="IDTip_Utilzator" />
+          <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilizatoris">
+      <EntityTypeMapping TypeName="ABDModel.Utilizatori">
+        <MappingFragment StoreEntitySet="Utilizatori">
+          <ScalarProperty Name="IDUtilizator" ColumnName="IDUtilizator" />
+          <ScalarProperty Name="IDTip_Utilizator" ColumnName="IDTip_Utilizator" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+          <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+          <ScalarProperty Name="Poza" ColumnName="Poza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

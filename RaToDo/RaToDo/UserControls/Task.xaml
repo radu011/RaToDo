@@ -1,0 +1,178 @@
+﻿<UserControl x:Class="RaToDo.UserControls.Task"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RaToDo.UserControls"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d"
+             Name="task">
+
+    <UserControl.Resources>
+        <Style x:Key="MyButton"
+               TargetType="Button">
+            <Setter Property="OverridesDefaultStyle"
+                    Value="True" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                                BorderThickness="0"
+                                BorderBrush="Black"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Opacity"
+                                        Value="0.8" />
+                                
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border x:Name="borderMain"
+            Background="{StaticResource Color5}"
+            Padding="5"
+            Margin="0 10 0 10"
+            BorderThickness="1"
+            BorderBrush="{StaticResource Color2}"
+            CornerRadius="10">
+        <Grid MinWidth="480"
+              MinHeight="100">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+
+            <Button x:Name="btnCheck"
+                    Background="Transparent"
+                    Click="btnCheck_Click"
+                    Style="{StaticResource MyButton}">
+                <fa:IconImage x:Name="btnCheckIcon"
+                              Icon="Circle"
+                              Stretch="Fill"
+                              Width="15"
+                              Height="15" />
+            </Button>
+
+            <DockPanel Grid.Column="1">
+                <TextBox x:Name="txtblockTitle"
+                         Text="{Binding Path=Title, ElementName=task}"
+                         Foreground="{StaticResource titleColor1}"
+                         FontFamily="Montserrat"
+                         FontSize="18"
+                         FontWeight="SemiBold"
+                         Margin="5 0 0 0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Left"
+                         DockPanel.Dock="Left"
+                         IsReadOnly="True"
+                         BorderThickness="0"
+                         Padding="2" />
+
+                <TextBox x:Name="txtblockCategory"
+                         Text="{Binding Path=Category, ElementName=task}"
+                         Foreground="{StaticResource titleColor3}"
+                         FontFamily="Montserrat"
+                         FontSize="14"
+                         FontWeight="SemiBold"
+                         DockPanel.Dock="Right"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Right"
+                         IsReadOnly="True"
+                         BorderThickness="0"
+                         Padding="2" />
+            </DockPanel>
+
+
+            <DockPanel Grid.Row="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Margin="5">
+                <TextBox x:Name="txtblockDescription"
+                         DockPanel.Dock="Top"
+                         Text="{Binding Path=Description, ElementName=task}"
+                         FontFamily="Montserrat"
+                         Foreground="{StaticResource titleColor2}"
+                         TextWrapping="Wrap"
+                         IsReadOnly="True"
+                         BorderThickness="0" />
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Bottom"
+                            VerticalAlignment="Bottom">
+                    <TextBlock x:Name="txtblockDeadline"
+                               Text="{Binding Path=Date, ElementName=task}"
+                               FontFamily="Montserrat"
+                               Height="16"
+                               Foreground="White"
+                               FontSize="12" />
+                    <TextBlock Text="|"
+                               FontFamily="Montserrat"
+                               Height="16"
+                               Foreground="White"
+                               FontSize="12"
+                               Margin="5 0 5 0" />
+                    <TextBlock x:Name="txtblockTypeOfTask"
+                               Text="{Binding Path=TypeOfTask, ElementName=task}"
+                               FontFamily="Montserrat"
+                               Height="16"
+                               Foreground="White"
+                               FontSize="12" />
+                </StackPanel>
+
+
+            </DockPanel>
+
+            <!--Task options (edit/delete)-->
+            <StackPanel Orientation="Horizontal"
+                        FlowDirection="RightToLeft"
+                        Grid.Column="2"
+                        Grid.Row="0">
+                <Button x:Name="btnDelete"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        VerticalAlignment="Center"
+                        Click="btnDelete_Click">
+                    <fa:IconImage Icon="Trash"
+                                  Width="15"
+                                  Height="15"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center" />
+                </Button>
+                <Button x:Name="btnEdit"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        VerticalAlignment="Center"
+                        Click="btnEdit_Click">
+                    <fa:IconImage x:Name="btnEditImage"
+                                  Icon="Edit"
+                                  Width="15"
+                                  Height="15"
+                                  Stretch="Uniform"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center" />
+                </Button>
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</UserControl>
